@@ -19,13 +19,13 @@ pipeline {
 
         stage('Build and Test') {
             steps {
-                bat 'call "C:\\Users\\Yashwanth\\Downloads\\apache-maven-3.10.0-bin\\apache-maven-3.10.0\\bin\\mvn.cmd" clean test'
+                bat 'call "C:\\Users\\Yashwanth\\.vscode\\extensions\\oracle.oracle-java-27.0.0\\nbcode\\java\\maven\\bin\\mvn.cmd" clean test'
             }
         }
 
         stage('Package') {
             steps {
-                bat 'call "C:\\Users\\Yashwanth\\Downloads\\apache-maven-3.10.0-bin\\apache-maven-3.10.0\\bin\\mvn.cmd" package'
+                bat 'call "C:\\Users\\Yashwanth\\.vscode\\extensions\\oracle.oracle-java-27.0.0\\nbcode\\java\\maven\\bin\\mvn.cmd" package'
             }
         }
     }
@@ -35,8 +35,9 @@ pipeline {
             archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
             echo 'Java CI/CD Pipeline completed successfully!'
         }
+
         failure {
-            echo 'Pipeline failed. Check Console Output.'
+            echo 'Java CI/CD Pipeline failed. Check the Console Output.'
         }
     }
 }
