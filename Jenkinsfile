@@ -6,11 +6,14 @@ pipeline {
         pollSCM('H/5 * * * *')
     }
 
+    options {
+        skipDefaultCheckout(true)
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                deleteDir()
-                bat 'git clone --branch main https://github.com/24h51a05c3-svg/JavaCICD.git .'
+                checkout scm
             }
         }
 
@@ -29,11 +32,9 @@ pipeline {
 
     post {
         success {
-            archiveArtifacts artifacts: 'target/*.jar',
-                             allowEmptyArchive: true
+            archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
             echo 'Java CI/CD Pipeline completed successfully!'
         }
-
         failure {
             echo 'Pipeline failed. Check Console Output.'
         }
